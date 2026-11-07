@@ -123,10 +123,10 @@
         <!-- MAIN VIEW -->
         <main id="view-standard" class="flex-1 flex flex-col justify-between gap-6">
             
-            <!-- BARS & IDEOLOGIES GRAPH -->
+            <!-- BARS & IDEOLOGIES GRAPH (NOCH 50% NÄHER ZUSAMMEN) -->
             <div class="pitch-card rounded-xl p-6 relative overflow-hidden flex-1 flex flex-col justify-end min-h-[460px]">
-                <div id="bars-container" class="flex gap-[1px] items-end h-[260px] w-full border-b border-gray-800 pb-2 relative justify-center"></div>
-                <div id="ideology-container" class="flex gap-[1px] pt-3 min-h-[140px] text-center items-start justify-center"></div>
+                <div id="bars-container" class="flex gap-[0.5px] items-end h-[260px] w-full border-b border-gray-800 pb-2 relative justify-center"></div>
+                <div id="ideology-container" class="flex gap-[0.5px] pt-3 min-h-[140px] text-center items-start justify-center"></div>
             </div>
 
             <!-- MAIN PARLIAMENT SEAT DISTRIBUTION -->
@@ -256,7 +256,7 @@
                             <input type="number" id="edit-majority" class="w-full bg-gray-900 border border-gray-800 p-2 text-sm rounded-lg text-white focus:border-sky-500 focus:outline-none" value="61" onblur="updateSeatRules()">
                         </div>
                         <div>
-                            <label class="text-xs text-gray-400">Gesamte Sitze (Optional)</label>
+                            <label class="text-xs text-gray-400">Gesamte Sitze</label>
                             <input type="number" id="edit-total-seats" class="w-full bg-gray-900 border border-gray-800 p-2 text-sm rounded-lg text-white focus:border-sky-500 focus:outline-none" value="120" onblur="updateSeatRules()">
                         </div>
                     </div>
@@ -321,16 +321,16 @@
         };
 
         let parliamentParties = [
-            { id: 1, name: 'National Party', short: 'NAT', seats: 38, pct: 39.0, oldPct: 35.8, diff: '+3.2%', color: '#00529F', img: '', ideology: 'Conservatism\nEconomic Liberalism', govTag: 'Gov.', block: 'Regierungsblock', coalition: true },
-            { id: 2, name: 'Labour Party', short: 'LAB', seats: 34, pct: 36.5, oldPct: 40.6, diff: '-4.1%', color: '#D82A20', img: '', ideology: 'Social Democracy\nCentre-Left', govTag: '', block: 'Oppositionsblock', coalition: false },
-            { id: 3, name: 'Green Party', short: 'GRN', seats: 15, pct: 10.8, oldPct: 9.3, diff: '+1.5%', color: '#097939', img: '', ideology: 'Green Politics\nProgressivism', govTag: '', block: 'Oppositionsblock', coalition: false },
-            { id: 4, name: 'ACT New Zealand', short: 'ACT', seats: 11, pct: 8.6, oldPct: 6.6, diff: '+2.0%', color: '#FEE600', img: '', ideology: 'Right-Libertarianism', govTag: 'Gov.', block: 'Regierungsblock', coalition: true },
-            { id: 5, name: 'New Zealand First', short: 'NZF', seats: 8, pct: 5.1, oldPct: 2.6, diff: '+2.5%', color: '#111827', img: '', ideology: 'Populism\nNationalism', govTag: 'Gov.', block: 'Regierungsblock', coalition: true }
+            { id: 1, name: 'National Party', short: 'National', seats: 38, pct: 39.0, oldPct: 35.8, diff: '+3.2%', color: '#00529F', ideology: 'Conservatism\nEconomic Liberalism', govTag: 'Gov.', block: 'Regierungsblock', coalition: true },
+            { id: 2, name: 'Labour Party', short: 'Labour', seats: 34, pct: 36.5, oldPct: 40.6, diff: '-4.1%', color: '#D82A20', ideology: 'Social Democracy\nCentre-Left', govTag: '', block: 'Oppositionsblock', coalition: false },
+            { id: 3, name: 'Green Party', short: 'Green', seats: 15, pct: 10.8, oldPct: 9.3, diff: '+1.5%', color: '#097939', ideology: 'Green Politics\nProgressivism', govTag: '', block: 'Oppositionsblock', coalition: false },
+            { id: 4, name: 'ACT New Zealand', short: 'ACT', seats: 11, pct: 8.6, oldPct: 6.6, diff: '+2.0%', color: '#FEE600', ideology: 'Right-Libertarianism', govTag: 'Gov.', block: 'Regierungsblock', coalition: true },
+            { id: 5, name: 'New Zealand First', short: 'NZ First', seats: 8, pct: 5.1, oldPct: 2.6, diff: '+2.5%', color: '#111827', ideology: 'Populism\nNationalism', govTag: 'Gov.', block: 'Regierungsblock', coalition: true }
         ];
 
         let presidentialCandidates = [
-            { id: 101, name: 'Kandidat A', short: 'K1', seats: 0, pct: 48.4, oldPct: 45.3, diff: '+3.1%', color: '#00529F', img: '', ideology: 'Konservativ', govTag: '', block: '', coalition: false },
-            { id: 102, name: 'Kandidat B', short: 'K2', seats: 0, pct: 41.6, oldPct: 43.0, diff: '-1.4%', color: '#D82A20', img: '', ideology: 'Sozialdemokratisch', govTag: '', block: '', coalition: false }
+            { id: 101, name: 'Kandidat A', short: 'Kandidat A', seats: 0, pct: 48.4, oldPct: 45.3, diff: '+3.1%', color: '#00529F', ideology: 'Konservativ', govTag: '', block: '', coalition: false },
+            { id: 102, name: 'Kandidat B', short: 'Kandidat B', seats: 0, pct: 41.6, oldPct: 43.0, diff: '-1.4%', color: '#D82A20', ideology: 'Sozialdemokratisch', govTag: '', block: '', coalition: false }
         ];
 
         let usStates = [
@@ -472,15 +472,15 @@
                 const oldHeightPct = Math.max(((p.oldPct || 0) / maxPct) * 100, 5);
 
                 const barItem = document.createElement('div');
-                barItem.className = 'flex flex-col items-center justify-end h-full w-full relative px-0.5';
+                barItem.className = 'flex flex-col items-center justify-end h-full w-full relative px-[0.25px]';
                 barItem.innerHTML = `
-                    <div class="w-full flex items-end justify-center gap-0.5 h-full relative">
+                    <div class="w-full flex items-end justify-center gap-[0.5px] h-full relative">
                         <!-- Main Bar -->
-                        <div class="w-full max-w-[75px] flex flex-col justify-between p-2 text-center text-white font-bold text-sm tech-font rounded-none shadow-lg transition-all duration-300 relative z-10" 
+                        <div class="w-full max-w-[80px] flex flex-col justify-between p-2 text-center text-white font-bold text-sm tech-font rounded-none shadow-lg transition-all duration-300 relative z-10" 
                              style="height: ${heightPct}%; background-color: ${p.color};">
                             <span>${p.pct}%</span>
                             
-                            <!-- EXAKT GLEICHE HORIZONTALE HÖHE FÜR GOV.-LABEL (bottom: 5px) -->
+                            <!-- EXAKT GLEICHE HORIZONTALE HÖHE FÜR GOV.-LABEL -->
                             ${p.govTag ? `
                                 <div class="absolute bottom-[5px] left-1/2 -translate-x-1/2 text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded text-white border border-white/20 shadow z-30 whitespace-nowrap" 
                                      style="background-color: ${p.color}">
@@ -501,10 +501,9 @@
                 const diffColor = isDiffPos ? 'text-emerald-400' : 'text-rose-400';
 
                 const ideologyItem = document.createElement('div');
-                ideologyItem.className = 'flex flex-col items-center gap-1.5 w-full px-0.5';
+                ideologyItem.className = 'flex flex-col items-center gap-1 w-full px-[0.25px]';
                 ideologyItem.innerHTML = `
                     <div class="text-xs font-semibold ${diffColor} tech-font">${p.diff}</div>
-                    ${p.img ? `<img src="${p.img}" class="w-9 h-9 rounded-full object-cover border border-white/20 shadow">` : ''}
                     <div class="font-bold text-xs text-white tech-font tracking-wide break-words w-full">${p.name}</div>
                     <div class="text-[10px] font-bold px-2 py-0.5 rounded text-white shadow-sm break-words max-w-full" style="background-color: ${p.color}">${p.short}</div>
                     <div class="text-[11px] text-gray-400 leading-snug break-words whitespace-normal w-full mt-1 font-medium">
@@ -864,8 +863,8 @@
                         <button onclick="removeParty(${p.id})" class="text-xs text-rose-400 hover:text-rose-300 font-medium">Löschen</button>
                     </div>
                     <div class="grid grid-cols-2 gap-2">
-                        <input type="text" value="${p.name}" onblur="updateParty(${p.id}, 'name', this.value)" class="bg-gray-950 border border-gray-800 p-1.5 text-xs rounded-lg text-white focus:border-sky-500 focus:outline-none" placeholder="Name">
-                        <input type="text" value="${p.short}" onblur="updateParty(${p.id}, 'short', this.value)" class="bg-gray-950 border border-gray-800 p-1.5 text-xs rounded-lg text-white focus:border-sky-500 focus:outline-none" placeholder="Kürzel">
+                        <input type="text" value="${p.name}" onblur="updateParty(${p.id}, 'name', this.value)" class="bg-gray-950 border border-gray-800 p-1.5 text-xs rounded-lg text-white focus:border-sky-500 focus:outline-none" placeholder="Name (z.B. National Party)">
+                        <input type="text" value="${p.short}" onblur="updateParty(${p.id}, 'short', this.value)" class="bg-gray-950 border border-gray-800 p-1.5 text-xs rounded-lg text-white focus:border-sky-500 focus:outline-none" placeholder="Feld-Text (z.B. National)">
                     </div>
                     ${currentMode === 'parliament' ? `
                     <div class="grid grid-cols-2 gap-2">
@@ -879,7 +878,7 @@
                     </div>
                     <div class="grid grid-cols-2 gap-2">
                         <input type="color" value="${p.color}" oninput="updatePartyColorInstant(${p.id}, this.value)" class="w-full h-8 bg-transparent border border-gray-800 rounded-lg cursor-pointer">
-                        <input type="text" value="${p.img}" onblur="updateParty(${p.id}, 'img', this.value)" class="bg-gray-950 border border-gray-800 p-1.5 text-xs rounded-lg text-white focus:border-sky-500 focus:outline-none" placeholder="Bild URL">
+                        <input type="text" value="${p.diff}" onblur="updateParty(${p.id}, 'diff', this.value)" class="bg-gray-950 border border-gray-800 p-1.5 text-xs rounded-lg text-white focus:border-sky-500 focus:outline-none" placeholder="+/- %">
                     </div>
                     <textarea onblur="updateParty(${p.id}, 'ideology', this.value)" class="w-full bg-gray-950 border border-gray-800 p-1.5 text-xs rounded-lg text-white h-14 focus:border-sky-500 focus:outline-none" placeholder="Ideologie">${p.ideology}</textarea>
                 `;
@@ -914,7 +913,7 @@
         function addParty() {
             const data = getActiveData();
             const newId = Date.now();
-            data.push({ id: newId, name: 'NEUER EINTRAG', short: 'NEU', seats: currentMode === 'parliament' ? 10 : 0, pct: 5.0, oldPct: 4.0, diff: '+1.0%', color: '#38BDF8', img: '', ideology: 'Zentrum', govTag: '', block: 'Neuer Block', coalition: false });
+            data.push({ id: newId, name: 'Neue Partei', short: 'Partei', seats: currentMode === 'parliament' ? 10 : 0, pct: 5.0, oldPct: 4.0, diff: '+1.0%', color: '#38BDF8', ideology: 'Zentrum', govTag: '', block: 'Neuer Block', coalition: false });
             renderAll(true);
         }
 
