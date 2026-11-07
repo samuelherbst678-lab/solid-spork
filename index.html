@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TV Wahl-Infografik Studio 2026</title>
+    <title>Elections Stats 2026 - Studio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.min.js"></script>
@@ -66,14 +66,13 @@
         </div>
         <div class="overflow-hidden flex-1 relative flex items-center">
             <div id="ticker-text" class="ticker-move text-white font-semibold text-sm tracking-wide">
-                <span class="inline-block px-8">+++ HOCHRECHNUNG 20:00: KOPF-AN-KOPF-RENNEN IN SCHLÜSSELBEZIRKEN +++</span>
-                <span class="inline-block px-8">WAHLBETEILIGUNG AUF REKORDNIVEAU +++</span>
-                <span class="inline-block px-8">ERSTE HOCHRECHNUNGEN ERWARTET +++</span>
-                <span class="inline-block px-8">KOALITIONSVERHANDLUNGEN BEREITS ANGESTOßEN +++</span>
-                <span class="inline-block px-8">+++ HOCHRECHNUNG 20:00: KOPF-AN-KOPF-RENNEN IN SCHLÜSSELBEZIRKEN +++</span>
-                <span class="inline-block px-8">WAHLBETEILIGUNG AUF REKORDNIVEAU +++</span>
-                <span class="inline-block px-8">ERSTE HOCHRECHNUNGEN ERWARTET +++</span>
-                <span class="inline-block px-8">KOALITIONSVERHANDLUNGEN BEREITS ANGESTOßEN +++</span>
+                <span class="inline-block px-8">+++ GENERAL ELECTION 2026: LIVE HOCHRECHNUNGEN LAUFEN +++</span>
+                <span class="inline-block px-8">WAHLBETEILIGUNG AUF HOHEM NIVEAU +++</span>
+                <span class="inline-block px-8">KOALITIONSGESPRÄCHE IM FOKUS +++</span>
+                <!-- Duplicate for seamless loop -->
+                <span class="inline-block px-8">+++ GENERAL ELECTION 2026: LIVE HOCHRECHNUNGEN LAUFEN +++</span>
+                <span class="inline-block px-8">WAHLBETEILIGUNG AUF HOHEM NIVEAU +++</span>
+                <span class="inline-block px-8">KOALITIONSGESPRÄCHE IM FOKUS +++</span>
             </div>
         </div>
     </div>
@@ -111,30 +110,17 @@
         <main id="view-standard" class="flex-1 flex flex-col justify-between gap-6">
             
             <!-- BARS & IDEOLOGIES GRAPH -->
-            <div class="pitch-card rounded-xl p-6 relative overflow-hidden flex-1 flex flex-col justify-end min-h-[440px]">
-                <!-- Threshold Line Option -->
-                <div id="threshold-line-container" class="absolute left-0 right-0 z-20 pointer-events-none flex items-center" style="bottom: 160px;">
-                    <div class="w-full border-t border-dashed border-gray-400/60 relative">
-                        <span id="threshold-label" class="absolute right-2 -top-3 text-[10px] font-bold tech-font bg-gray-800 px-1.5 py-0.5 rounded text-gray-300 border border-gray-700">5.0%</span>
-                    </div>
-                </div>
-
-                <!-- Bars: Tight & Rectangular (No gaps between columns: gap-0) -->
-                <div id="bars-container" class="grid gap-0 items-end h-[260px] w-full border-b border-gray-800 pb-2 relative z-10"></div>
+            <div class="pitch-card rounded-xl p-6 relative overflow-hidden flex-1 flex flex-col justify-end min-h-[460px]">
+                <div id="bars-container" class="grid gap-1 items-end h-[260px] w-full border-b border-gray-800 pb-2 relative"></div>
                 <div id="ideology-container" class="grid gap-1 pt-3 min-h-[140px] text-center items-start"></div>
             </div>
 
             <!-- MAIN PARLIAMENT SEAT DISTRIBUTION -->
             <div id="parliament-section" class="pitch-card rounded-xl p-6 flex flex-col items-center justify-center relative min-h-[340px]">
-                <div class="flex justify-between items-center w-full mb-3">
+                <div class="flex justify-between items-center w-full mb-3 max-w-3xl">
                     <h3 class="text-xs font-bold tech-font text-gray-400 uppercase tracking-widest">Gesamte Sitzverteilung</h3>
-                    <div class="flex items-center gap-2">
-                        <span class="text-[10px] font-bold tech-font text-gray-500 uppercase">Ansicht:</span>
-                        <button onclick="setSeatDisplayMode('parties')" id="btn-view-parties" class="px-2.5 py-1 text-[11px] font-bold rounded bg-sky-600 text-white tech-font shadow">PARTEIEN</button>
-                        <button onclick="setSeatDisplayMode('blocks')" id="btn-view-blocks" class="px-2.5 py-1 text-[11px] font-bold rounded bg-gray-800 hover:bg-gray-700 text-gray-300 tech-font border border-gray-700">BLÖCKE</button>
-                    </div>
+                    <button onclick="toggleSeatGrouping()" id="btn-seat-grouping" class="text-xs bg-gray-800 hover:bg-gray-700 text-sky-400 px-3 py-1 rounded border border-gray-700 tech-font font-bold">Modus: Parteien</button>
                 </div>
-
                 <div id="block-container" class="flex gap-3 mb-4 flex-wrap justify-center w-full max-w-3xl"></div>
                 
                 <!-- ARC LAYOUT CONTAINER -->
@@ -151,14 +137,14 @@
                         </div>
                         <div class="flex-1 flex flex-col gap-4">
                             <div class="flex flex-col gap-1 bg-gray-900/60 p-3 rounded-lg border border-gray-800">
-                                <span class="text-[10px] font-bold tech-font text-sky-400 tracking-wider">REGIERUNGS-BANKS (GOVERNMENT BENCH)</span>
+                                <span class="text-[10px] font-bold tech-font text-sky-400 tracking-wider">REGIERUNGS-BANKS</span>
                                 <div id="uk-main-gov-grid" class="flex flex-wrap gap-1.5 items-center"></div>
                             </div>
                             <div class="w-full h-0.5 bg-rose-600/40 relative flex justify-center items-center">
-                                <span class="text-[8px] bg-panel px-2 text-gray-500 font-bold tech-font">WESTMINSTER AISLE</span>
+                                <span class="text-[8px] bg-panel px-2 text-gray-500 font-bold tech-font">AISLE</span>
                             </div>
                             <div class="flex flex-col gap-1 bg-gray-900/60 p-3 rounded-lg border border-gray-800">
-                                <span class="text-[10px] font-bold tech-font text-rose-400 tracking-wider">OPPOSITIONS-BANKS (OPPOSITION BENCH)</span>
+                                <span class="text-[10px] font-bold tech-font text-rose-400 tracking-wider">OPPOSITIONS-BANKS</span>
                                 <div id="uk-main-opp-grid" class="flex flex-wrap gap-1.5 items-center"></div>
                             </div>
                         </div>
@@ -171,7 +157,7 @@
                 <div class="flex justify-between items-center w-full mb-3">
                     <h3 class="text-xs font-bold tech-font text-gray-300 uppercase tracking-wider">Koalitionsrechner</h3>
                     <div id="coalition-status" class="text-xs font-bold tech-font px-3.5 py-1.5 rounded-lg bg-rose-950/60 text-rose-300 border border-rose-800/60">
-                        KEINE MEHRHEIT (0 / 127 Sitze)
+                        KEINE MEHRHEIT (0 / 66 Sitze)
                     </div>
                 </div>
 
@@ -185,12 +171,10 @@
                 <div class="flex flex-col items-center justify-center w-full pt-3 border-t border-gray-800">
                     <span class="text-xs font-bold tech-font text-gray-400 mb-3 uppercase tracking-wider">Koalitions-Sitzverteilung</span>
                     
-                    <!-- COALITION ARC CONTAINER -->
                     <div id="coalition-arc-wrapper" class="relative w-[340px] h-[180px] flex justify-center items-center">
                         <canvas id="coalitionChart"></canvas>
                     </div>
 
-                    <!-- COALITION WESTMINSTER CONTAINER -->
                     <div id="coalition-westminster-wrapper" class="hidden flex-col items-center justify-center w-full max-w-4xl py-4">
                         <div class="flex items-center gap-4 w-full">
                             <div class="flex flex-col items-center justify-center border border-gray-800 p-2.5 rounded-lg bg-gray-900 shadow-inner">
@@ -199,14 +183,14 @@
                             </div>
                             <div class="flex-1 flex flex-col gap-4">
                                 <div class="flex flex-col gap-1 bg-gray-900/60 p-3 rounded-lg border border-gray-800">
-                                    <span class="text-[10px] font-bold tech-font text-emerald-400 tracking-wider">GEWÄHLTE KOALITION (GOVERNMENT)</span>
+                                    <span class="text-[10px] font-bold tech-font text-emerald-400 tracking-wider">GEWÄHLTE KOALITION</span>
                                     <div id="uk-coalition-gov-grid" class="flex flex-wrap gap-1.5 items-center"></div>
                                 </div>
                                 <div class="w-full h-0.5 bg-rose-600/40 relative flex justify-center items-center">
-                                    <span class="text-[8px] bg-panel px-2 text-gray-500 font-bold tech-font">WESTMINSTER AISLE</span>
+                                    <span class="text-[8px] bg-panel px-2 text-gray-500 font-bold tech-font">AISLE</span>
                                 </div>
                                 <div class="flex flex-col gap-1 bg-gray-900/60 p-3 rounded-lg border border-gray-800">
-                                    <span class="text-[10px] font-bold tech-font text-gray-400 tracking-wider">RESTLICHE PARTEIEN / OPPOSITION</span>
+                                    <span class="text-[10px] font-bold tech-font text-gray-400 tracking-wider">RESTLICHE PARTEIEN</span>
                                     <div id="uk-coalition-opp-grid" class="flex flex-wrap gap-1.5 items-center"></div>
                                 </div>
                             </div>
@@ -224,7 +208,7 @@
                     <span class="text-amber-400">270 ZUR MEHRHEIT (TOTAL 538)</span>
                     <span class="text-rose-400 text-lg">REPUBLIKANER: <span id="us-rep-votes">0</span></span>
                 </div>
-                <div class="w-full bg-gray-900 h-8 rounded-lg overflow-hidden flex relative border border-gray-800 shadow-inner">
+                <div class="w-full bg-gray-900 h-8 rounded-sm overflow-hidden flex relative border border-gray-800 shadow-inner">
                     <div id="us-bar-dem" class="bg-blue-600 h-full transition-all duration-300" style="width: 0%"></div>
                     <div id="us-bar-neutral" class="bg-gray-700 h-full transition-all duration-300" style="width: 100%"></div>
                     <div id="us-bar-other" class="bg-emerald-600 h-full transition-all duration-300" style="width: 0%"></div>
@@ -236,7 +220,7 @@
             <div class="pitch-card rounded-xl p-4 flex-1">
                 <div class="flex justify-between items-center mb-3">
                     <span class="text-xs font-semibold tech-font text-gray-400">STAATEN-ZUWEISUNG (⭐ = SWING STATE)</span>
-                    <button onclick="resetUSStates()" class="text-xs bg-gray-800 hover:bg-gray-700 px-3 py-1.5 rounded-lg text-gray-300 border border-gray-700">Alle Zurücksetzen (Grau)</button>
+                    <button onclick="resetUSStates()" class="text-xs bg-gray-800 hover:bg-gray-700 px-3 py-1.5 rounded-lg text-gray-300 border border-gray-700">Alle Zurücksetzen</button>
                 </div>
                 <div id="us-states-grid" class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-9 lg:grid-cols-11 gap-2"></div>
             </div>
@@ -252,8 +236,12 @@
 
         <div class="space-y-6">
             <div>
-                <h3 class="text-xs font-bold tech-font text-sky-400 uppercase mb-2">Globale Daten & Optionen</h3>
-                <div class="space-y-3">
+                <h3 class="text-xs font-bold tech-font text-sky-400 uppercase mb-2">Globale Daten & Hürde</h3>
+                <div class="space-y-2">
+                    <div>
+                        <label class="text-xs text-gray-400">Hürden-Prozentwert (z. B. 5.0 für 5%-Hürde, leer lassen für aus)</label>
+                        <input type="number" step="0.1" id="edit-threshold" class="w-full bg-gray-900 border border-gray-800 p-2 text-sm rounded-lg text-white focus:border-sky-500 focus:outline-none" value="5.0" onblur="updateThreshold()">
+                    </div>
                     <div>
                         <label class="text-xs text-gray-400">Flagge / Icon</label>
                         <input type="text" id="edit-flag" class="w-full bg-gray-900 border border-gray-800 p-2 text-sm rounded-lg text-white focus:border-sky-500 focus:outline-none" onblur="updateMeta()">
@@ -267,10 +255,6 @@
                             <label class="text-xs text-gray-400">Wahlbeteiligung</label>
                             <input type="text" id="edit-turnout" class="w-full bg-gray-900 border border-gray-800 p-2 text-sm rounded-lg text-white focus:border-sky-500 focus:outline-none" onblur="updateMeta()">
                         </div>
-                    </div>
-                    <div>
-                        <label class="text-xs text-gray-400">Hürden-Linie (Prozent, z.B. 5.0 oder leer lassen)</label>
-                        <input type="number" step="0.1" id="edit-threshold" class="w-full bg-gray-900 border border-gray-800 p-2 text-sm rounded-lg text-white focus:border-sky-500 focus:outline-none" onblur="updateThreshold()" placeholder="z.B. 5.0">
                     </div>
                 </div>
             </div>
@@ -293,8 +277,8 @@
     <script>
         let currentMode = 'parliament';
         let parliamentStyle = 'arc';
-        let seatDisplayMode = 'parties'; // 'parties' or 'blocks'
-        let thresholdValue = 5.0;
+        let seatMode = 'parties'; // 'parties' or 'blocks'
+        let thresholdPct = 5.0;
         let parliamentChartInstance = null;
         let coalitionChartInstance = null;
 
@@ -302,20 +286,20 @@
             flag: '🇳🇿',
             progress: '88.4%',
             turnout: '74.2%',
-            ticker: '+++ HOCHRECHNUNG 20:00: KOPF-AN-KOPF-RENNEN IN SCHLÜSSELBEZIRKEN +++ WAHLBETEILIGUNG AUF REKORDNIVEAU +++ ERSTE HOCHRECHNUNGEN ERWARTET +++ KOALITIONSVERHANDLUNGEN BEREITS ANGESTOßEN +++'
+            ticker: '+++ GENERAL ELECTION 2026: LIVE HOCHRECHNUNGEN LAUFEN +++ WAHLBETEILIGUNG AUF HOHEM NIVEAU +++ KOALITIONSGESPRÄCHE IM FOKUS +++'
         };
 
         let parliamentParties = [
-            { id: 1, name: 'National Party', short: 'NAT', seats: 38, pct: 39.0, diff: '+3.2%', color: '#00529F', img: '', ideology: 'Conservatism\nEconomic Liberalism', block: 'Regierungsblock', blockShort: 'NAT', govTag: 'Gov.', coalition: true },
-            { id: 2, name: 'Labour Party', short: 'LAB', seats: 34, pct: 36.5, diff: '-4.1%', color: '#D82A20', img: '', ideology: 'Social Democracy\nCentre-Left', block: 'Oppositionsblock', blockShort: 'LAB', govTag: '', coalition: false },
-            { id: 3, name: 'Green Party', short: 'GRN', seats: 15, pct: 10.8, diff: '+1.5%', color: '#097939', img: '', ideology: 'Green Politics\nProgressivism', block: 'Oppositionsblock', blockShort: 'GRN', govTag: '', coalition: false },
-            { id: 4, name: 'ACT New Zealand', short: 'ACT', seats: 11, pct: 8.6, diff: '+2.0%', color: '#FEE600', img: '', ideology: 'Right-Libertarianism\nClassical Liberalism', block: 'Regierungsblock', blockShort: 'ACT', govTag: 'Gov.', coalition: true },
-            { id: 5, name: 'New Zealand First', short: 'NZF', seats: 8, pct: 5.1, diff: '+2.5%', color: '#000000', img: '', ideology: 'Populism\nNationalism', block: 'Regierungsblock', blockShort: 'NZF', govTag: 'Gov.', coalition: true }
+            { id: 1, name: 'National Party', short: 'NAT', seats: 38, pct: 39.0, diff: '+3.2%', color: '#00529F', img: '', ideology: 'Conservatism\nEconomic Liberalism', govTag: 'Gov.', block: 'Regierungsblock', coalition: true },
+            { id: 2, name: 'Labour Party', short: 'LAB', seats: 34, pct: 36.5, diff: '-4.1%', color: '#D82A20', img: '', ideology: 'Social Democracy\nCentre-Left', govTag: '', block: 'Oppositionsblock', coalition: false },
+            { id: 3, name: 'Green Party', short: 'GRN', seats: 15, pct: 10.8, diff: '+1.5%', color: '#097939', img: '', ideology: 'Green Politics\nProgressivism', govTag: '', block: 'Oppositionsblock', coalition: false },
+            { id: 4, name: 'ACT New Zealand', short: 'ACT', seats: 11, pct: 8.6, diff: '+2.0%', color: '#FEE600', img: '', ideology: 'Right-Libertarianism', govTag: 'Gov.', block: 'Regierungsblock', coalition: true },
+            { id: 5, name: 'New Zealand First', short: 'NZF', seats: 8, pct: 5.1, diff: '+2.5%', color: '#111827', img: '', ideology: 'Populism\nNationalism', govTag: 'Gov.', block: 'Regierungsblock', coalition: true }
         ];
 
         let presidentialCandidates = [
-            { id: 101, name: 'Kandidat A', short: 'K1', seats: 0, pct: 48.4, diff: '+3.1%', color: '#00529F', img: '', ideology: 'Konservativ', block: '', blockShort: '', govTag: '', coalition: false },
-            { id: 102, name: 'Kandidat B', short: 'K2', seats: 0, pct: 41.6, diff: '-1.4%', color: '#D82A20', img: '', ideology: 'Sozialdemokratisch', block: '', blockShort: '', govTag: '', coalition: false }
+            { id: 101, name: 'Kandidat A', short: 'K1', seats: 0, pct: 48.4, diff: '+3.1%', color: '#00529F', img: '', ideology: 'Konservativ', govTag: '', block: '', coalition: false },
+            { id: 102, name: 'Kandidat B', short: 'K2', seats: 0, pct: 41.6, diff: '-1.4%', color: '#D82A20', img: '', ideology: 'Sozialdemokratisch', govTag: '', block: '', coalition: false }
         ];
 
         let usStates = [
@@ -353,12 +337,11 @@
 
         window.onload = () => {
             renderAll(true);
+            document.getElementById('edit-threshold').value = thresholdPct;
             document.getElementById('edit-flag').value = meta.flag;
             document.getElementById('edit-progress').value = meta.progress;
             document.getElementById('edit-turnout').value = meta.turnout;
             document.getElementById('edit-ticker').value = meta.ticker;
-            document.getElementById('edit-threshold').value = thresholdValue;
-            updateThresholdUI();
         };
 
         function setParliamentStyle(style) {
@@ -370,7 +353,6 @@
                 document.getElementById('main-arc-wrapper').classList.remove('hidden');
                 document.getElementById('main-westminster-wrapper').classList.add('hidden');
                 document.getElementById('main-westminster-wrapper').classList.remove('flex');
-
                 document.getElementById('coalition-arc-wrapper').classList.remove('hidden');
                 document.getElementById('coalition-westminster-wrapper').classList.add('hidden');
                 document.getElementById('coalition-westminster-wrapper').classList.remove('flex');
@@ -378,7 +360,6 @@
                 document.getElementById('main-arc-wrapper').classList.add('hidden');
                 document.getElementById('main-westminster-wrapper').classList.remove('hidden');
                 document.getElementById('main-westminster-wrapper').classList.add('flex');
-
                 document.getElementById('coalition-arc-wrapper').classList.add('hidden');
                 document.getElementById('coalition-westminster-wrapper').classList.remove('hidden');
                 document.getElementById('coalition-westminster-wrapper').classList.add('flex');
@@ -386,10 +367,9 @@
             renderAll(true);
         }
 
-        function setSeatDisplayMode(mode) {
-            seatDisplayMode = mode;
-            document.getElementById('btn-view-parties').className = mode === 'parties' ? 'px-2.5 py-1 text-[11px] font-bold rounded bg-sky-600 text-white tech-font shadow' : 'px-2.5 py-1 text-[11px] font-bold rounded bg-gray-800 hover:bg-gray-700 text-gray-300 tech-font border border-gray-700';
-            document.getElementById('btn-view-blocks').className = mode === 'blocks' ? 'px-2.5 py-1 text-[11px] font-bold rounded bg-sky-600 text-white tech-font shadow' : 'px-2.5 py-1 text-[11px] font-bold rounded bg-gray-800 hover:bg-gray-700 text-gray-300 tech-font border border-gray-700';
+        function toggleSeatGrouping() {
+            seatMode = seatMode === 'parties' ? 'blocks' : 'parties';
+            document.getElementById('btn-seat-grouping').innerText = `Modus: ${seatMode === 'parties' ? 'Parteien' : 'Blöcke'}`;
             renderAll(true);
         }
 
@@ -407,44 +387,17 @@
                 document.getElementById('view-us').classList.add('hidden');
                 document.getElementById('view-us').classList.remove('flex');
                 document.getElementById('view-standard').classList.remove('hidden');
-
                 document.getElementById('parliament-section').style.display = mode === 'parliament' ? 'flex' : 'none';
                 document.getElementById('coalition-section').style.display = mode === 'parliament' ? 'flex' : 'none';
             }
             renderAll(true);
         }
 
-        function updateThreshold() {
-            const val = parseFloat(document.getElementById('edit-threshold').value);
-            thresholdValue = isNaN(val) ? 0 : val;
-            updateThresholdUI();
-            renderBarsAndIdeology();
-        }
-
-        function updateThresholdUI() {
-            const container = document.getElementById('threshold-line-container');
-            const label = document.getElementById('threshold-label');
-            if (thresholdValue <= 0) {
-                container.style.display = 'none';
-            } else {
-                container.style.display = 'flex';
-                label.innerText = thresholdValue.toFixed(1) + '%';
-                // calculate vertical position relative to max bar height (260px)
-                const data = getActiveData();
-                const maxPct = Math.max(...data.map(p => p.pct), 1);
-                const heightPx = Math.min((thresholdValue / maxPct) * 260, 260);
-                container.style.bottom = (heightPx + 40) + 'px';
-            }
-        }
-
         function renderAll(fullRender = false) {
             renderBarsAndIdeology();
             if (currentMode === 'parliament') {
-                if (parliamentStyle === 'arc') {
-                    renderParliamentChart(fullRender);
-                } else {
-                    renderWestminsterMainGrid();
-                }
+                if (parliamentStyle === 'arc') renderParliamentChart(fullRender);
+                else renderWestminsterMainGrid();
                 renderBlocks();
                 renderCoalitionButtonsAndChart(fullRender);
             } else if (currentMode === 'us') {
@@ -468,16 +421,30 @@
 
             const maxPct = Math.max(...data.map(p => p.pct), 1);
 
+            // Optional threshold line
+            if (!isNaN(thresholdPct) && thresholdPct > 0 && thresholdPct <= maxPct) {
+                const thresholdHeightRatio = (thresholdPct / maxPct);
+                const lineDiv = document.createElement('div');
+                lineDiv.className = 'absolute left-0 right-0 z-20 pointer-events-none flex items-center';
+                lineDiv.style.bottom = `${thresholdHeightRatio * 260}px`;
+                lineDiv.innerHTML = `
+                    <div class="w-full border-t border-dashed border-white/60 relative">
+                        <span class="absolute right-2 -top-3 text-[10px] font-bold tech-font bg-panel px-1 text-white/80">${thresholdPct}%</span>
+                    </div>
+                `;
+                barsContainer.appendChild(lineDiv);
+            }
+
             data.forEach(p => {
                 const heightPct = Math.max((p.pct / maxPct) * 100, 15);
 
                 const barItem = document.createElement('div');
                 barItem.className = 'flex flex-col items-center justify-end h-full w-full';
                 barItem.innerHTML = `
-                    <div class="w-full flex flex-col justify-between p-1.5 text-center text-white font-bold text-xs tech-font rounded-none shadow-md transition-all duration-300 relative" 
+                    <div class="w-full max-w-[76px] flex flex-col justify-between p-2 text-center text-white font-bold text-sm tech-font rounded-none shadow-lg transition-all duration-300 relative" 
                          style="height: ${heightPct}%; background-color: ${p.color};">
                         <span>${p.pct}%</span>
-                        ${p.govTag ? `<div class="text-[8px] font-black uppercase tracking-wider bg-black/50 px-1 py-0.5 rounded text-gray-200 mt-auto border border-white/10">${p.govTag}</div>` : ''}
+                        ${p.govTag ? `<div class="text-[9px] font-black uppercase tracking-wider px-1 py-0.5 rounded text-white mt-auto border border-white/20 shadow" style="background-color: ${p.color}">${p.govTag}</div>` : ''}
                     </div>
                 `;
                 barsContainer.appendChild(barItem);
@@ -491,14 +458,13 @@
                     <div class="text-xs font-semibold ${diffColor} tech-font">${p.diff}</div>
                     ${p.img ? `<img src="${p.img}" class="w-9 h-9 rounded-full object-cover border border-white/20 shadow">` : ''}
                     <div class="font-bold text-xs text-white tech-font tracking-wide break-words w-full">${p.name}</div>
-                    <div class="text-[10px] font-bold px-2 py-0.5 rounded-none text-white shadow-sm break-words max-w-full" style="background-color: ${p.color}">${p.short}</div>
+                    <div class="text-[10px] font-bold px-2 py-0.5 rounded text-white shadow-sm break-words max-w-full" style="background-color: ${p.color}">${p.short}</div>
                     <div class="text-[11px] text-gray-400 leading-snug break-words whitespace-normal w-full mt-1 font-medium">
                         ${p.ideology.replace(/\n/g, '<br>')}
                     </div>
                 `;
                 ideologyContainer.appendChild(ideologyItem);
             });
-            updateThresholdUI();
         }
 
         function renderWestminsterMainGrid() {
@@ -516,7 +482,6 @@
                     const dot = document.createElement('div');
                     dot.className = 'uk-dot shadow-sm';
                     dot.style.backgroundColor = p.color;
-                    dot.title = `${p.short} (${p.seats} Sitze)`;
                     govGrid.appendChild(dot);
                 }
             });
@@ -526,7 +491,6 @@
                     const dot = document.createElement('div');
                     dot.className = 'uk-dot shadow-sm';
                     dot.style.backgroundColor = p.color;
-                    dot.title = `${p.short} (${p.seats} Sitze)`;
                     oppGrid.appendChild(dot);
                 }
             });
@@ -534,10 +498,15 @@
 
         function renderParliamentChart(fullRebuild = false) {
             const ctx = document.getElementById('parliamentChart').getContext('2d');
+            
             let dataSeats = [];
             let colors = [];
 
-            if (seatDisplayMode === 'blocks') {
+            if (seatMode === 'parties') {
+                dataSeats = parliamentParties.map(p => p.seats);
+                colors = parliamentParties.map(p => p.color);
+            } else {
+                // Group by blocks, strongest party defines color
                 const blockMap = {};
                 parliamentParties.forEach(p => {
                     const bName = (p.block && p.block.trim() !== '') ? p.block.trim() : 'Sonstige';
@@ -549,11 +518,8 @@
                     const b = blockMap[bName];
                     const strongest = [...b.parties].sort((x, y) => y.seats - x.seats)[0];
                     dataSeats.push(b.seats);
-                    colors.push(strongest.color);
+                    colors.push(strongest ? strongest.color : '#6366f1');
                 });
-            } else {
-                dataSeats = parliamentParties.map(p => p.seats);
-                colors = parliamentParties.map(p => p.color);
             }
 
             if (!parliamentChartInstance || fullRebuild) {
@@ -591,9 +557,7 @@
             const blockMap = {};
             parliamentParties.forEach(p => {
                 const blockName = (p.block && p.block.trim() !== '') ? p.block.trim() : 'Sonstige';
-                if (!blockMap[blockName]) {
-                    blockMap[blockName] = { seats: 0, parties: [] };
-                }
+                if (!blockMap[blockName]) blockMap[blockName] = { seats: 0, parties: [] };
                 blockMap[blockName].seats += p.seats;
                 blockMap[blockName].parties.push(p);
             });
@@ -618,7 +582,7 @@
 
             let totalSelectedSeats = 0;
             const maxSeats = parliamentParties.reduce((a, b) => a + b.seats, 0);
-            const majorityThreshold = Math.floor(maxSeats / 2) + 1;
+            const majorityThreshold = 66; // NZ Majority threshold example
 
             const blockNames = [...new Set(parliamentParties.map(p => (p.block && p.block.trim() !== '') ? p.block.trim() : 'Sonstige'))];
 
@@ -678,7 +642,6 @@
 
             if (parliamentStyle === 'arc') {
                 const ctx = document.getElementById('coalitionChart').getContext('2d');
-
                 if (!coalitionChartInstance || fullRebuild) {
                     if (coalitionChartInstance) coalitionChartInstance.destroy();
                     coalitionChartInstance = new Chart(ctx, {
@@ -696,10 +659,7 @@
                             cutout: '48%',
                             responsive: true,
                             maintainAspectRatio: false,
-                            animation: {
-                                duration: 1000,
-                                easing: 'easeOutCubic'
-                            },
+                            animation: { duration: 1000, easing: 'easeOutCubic' },
                             plugins: { legend: { display: false } }
                         }
                     });
@@ -808,6 +768,12 @@
             panel.classList.toggle('translate-x-full');
         }
 
+        function updateThreshold() {
+            const val = parseFloat(document.getElementById('edit-threshold').value);
+            thresholdPct = isNaN(val) ? 0 : val;
+            renderAll(false);
+        }
+
         function updateMeta() {
             meta.flag = document.getElementById('edit-flag').value;
             meta.progress = document.getElementById('edit-progress').value;
@@ -847,10 +813,9 @@
                         <input type="text" value="${p.short}" onblur="updateParty(${p.id}, 'short', this.value)" class="bg-gray-950 border border-gray-800 p-1.5 text-xs rounded-lg text-white focus:border-sky-500 focus:outline-none" placeholder="Kürzel">
                     </div>
                     ${currentMode === 'parliament' ? `
-                    <div class="grid grid-cols-3 gap-2">
+                    <div class="grid grid-cols-2 gap-2">
                         <input type="text" value="${p.block || ''}" onblur="updateParty(${p.id}, 'block', this.value)" class="bg-gray-950 border border-sky-500/30 p-1.5 text-xs rounded-lg text-sky-300 focus:outline-none" placeholder="Block-Name">
-                        <input type="text" value="${p.blockShort || ''}" onblur="updateParty(${p.id}, 'blockShort', this.value)" class="bg-gray-950 border border-sky-500/30 p-1.5 text-xs rounded-lg text-sky-300 focus:outline-none" placeholder="Block-Kürzel">
-                        <input type="text" value="${p.govTag || ''}" onblur="updateParty(${p.id}, 'govTag', this.value)" class="bg-gray-950 border border-emerald-500/30 p-1.5 text-xs rounded-lg text-emerald-300 focus:outline-none" placeholder="Gov./Reg. Tag">
+                        <input type="text" value="${p.govTag || ''}" onblur="updateParty(${p.id}, 'govTag', this.value)" class="bg-gray-950 border border-sky-500/30 p-1.5 text-xs rounded-lg text-sky-300 focus:outline-none" placeholder="Gov. Tag (z.B. Gov.)">
                     </div>` : ''}
                     <div class="grid grid-cols-3 gap-2">
                         <input type="number" value="${p.seats}" onblur="updateParty(${p.id}, 'seats', parseInt(this.value))" class="bg-gray-950 border border-gray-800 p-1.5 text-xs rounded-lg text-white focus:border-sky-500 focus:outline-none" placeholder="Sitze" ${currentMode === 'presidential' ? 'disabled' : ''}>
@@ -859,7 +824,7 @@
                     </div>
                     <div class="grid grid-cols-2 gap-2">
                         <input type="color" value="${p.color}" oninput="updatePartyColorInstant(${p.id}, this.value)" class="w-full h-8 bg-transparent border border-gray-800 rounded-lg cursor-pointer">
-                        <input type="text" value="${p.img}" onblur="updateParty(${p.id}, 'img', this.value)" class="bg-gray-950 border border-gray-800 p-1.5 text-xs rounded-lg text-white focus:border-sky-500 focus:outline-none" placeholder="Bild URL (Optional)">
+                        <input type="text" value="${p.img}" onblur="updateParty(${p.id}, 'img', this.value)" class="bg-gray-950 border border-gray-800 p-1.5 text-xs rounded-lg text-white focus:border-sky-500 focus:outline-none" placeholder="Bild URL">
                     </div>
                     <textarea onblur="updateParty(${p.id}, 'ideology', this.value)" class="w-full bg-gray-950 border border-gray-800 p-1.5 text-xs rounded-lg text-white h-14 focus:border-sky-500 focus:outline-none" placeholder="Ideologie">${p.ideology}</textarea>
                 `;
@@ -894,7 +859,7 @@
         function addParty() {
             const data = getActiveData();
             const newId = Date.now();
-            data.push({ id: newId, name: 'NEUER EINTRAG', short: 'NEU', seats: currentMode === 'parliament' ? 10 : 0, pct: 5.0, diff: '+0.0%', color: '#38BDF8', img: '', ideology: 'Zentrum', block: 'Neuer Block', blockShort: 'NEU', govTag: '', coalition: false });
+            data.push({ id: newId, name: 'NEUER EINTRAG', short: 'NEU', seats: currentMode === 'parliament' ? 10 : 0, pct: 5.0, diff: '+0.0%', color: '#38BDF8', img: '', ideology: 'Zentrum', govTag: '', block: 'Neuer Block', coalition: false });
             renderAll(true);
         }
 
