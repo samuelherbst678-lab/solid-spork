@@ -123,7 +123,7 @@
         <!-- MAIN VIEW -->
         <main id="view-standard" class="flex-1 flex flex-col justify-between gap-6">
             
-            <!-- BARS & IDEOLOGIES GRAPH (ULTRA ENGER ABSTAND) -->
+            <!-- BARS & IDEOLOGIES GRAPH -->
             <div class="pitch-card rounded-xl p-6 relative overflow-hidden flex-1 flex flex-col justify-end min-h-[460px]">
                 <div id="bars-container" class="flex gap-[1px] items-end h-[260px] w-full border-b border-gray-800 pb-2 relative justify-center"></div>
                 <div id="ideology-container" class="flex gap-[1px] pt-3 min-h-[140px] text-center items-start justify-center"></div>
@@ -132,7 +132,7 @@
             <!-- MAIN PARLIAMENT SEAT DISTRIBUTION -->
             <div id="parliament-section" class="pitch-card rounded-xl p-6 flex flex-col items-center justify-center relative min-h-[340px]">
                 <div class="flex justify-between items-center w-full mb-3 max-w-3xl">
-                    <h3 class="text-xs font-bold tech-font text-gray-400 uppercase tracking-widest">Gesamte Sitzverteilung</h3>
+                    <h3 class="text-xs font-bold tech-font text-gray-400 uppercase tracking-widest">Gesamte Sitzverteilung (<span id="display-total-seats">120</span> Sitze)</h3>
                     <button onclick="toggleSeatGrouping()" id="btn-seat-grouping" class="text-xs bg-gray-800 hover:bg-gray-700 text-sky-400 px-3 py-1 rounded border border-gray-700 tech-font font-bold">Modus: Parteien</button>
                 </div>
                 <div id="block-container" class="flex gap-3 mb-4 flex-wrap justify-center w-full max-w-3xl"></div>
@@ -169,7 +169,7 @@
                 <div class="flex justify-between items-center w-full mb-3">
                     <h3 class="text-xs font-bold tech-font text-gray-300 uppercase tracking-wider">Koalitionsrechner</h3>
                     <div id="coalition-status" class="text-xs font-bold tech-font px-3.5 py-1.5 rounded-lg bg-rose-950/60 text-rose-300 border border-rose-800/60">
-                        KEINE MEHRHEIT (0 / 64 Sitze)
+                        KEINE MEHRHEIT (0 / 61 Sitze)
                     </div>
                 </div>
 
@@ -248,12 +248,28 @@
 
         <div class="space-y-6">
             <div>
-                <h3 class="text-xs font-bold tech-font text-sky-400 uppercase mb-2">Globale Daten & Hürde</h3>
+                <h3 class="text-xs font-bold tech-font text-sky-400 uppercase mb-2">Sitz- & Mehrheitssteuerung</h3>
                 <div class="space-y-2">
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="text-xs text-gray-400">Benötigte Mehrheit (Sitze)</label>
+                            <input type="number" id="edit-majority" class="w-full bg-gray-900 border border-gray-800 p-2 text-sm rounded-lg text-white focus:border-sky-500 focus:outline-none" value="61" onblur="updateSeatRules()">
+                        </div>
+                        <div>
+                            <label class="text-xs text-gray-400">Gesamte Sitze (Optional)</label>
+                            <input type="number" id="edit-total-seats" class="w-full bg-gray-900 border border-gray-800 p-2 text-sm rounded-lg text-white focus:border-sky-500 focus:outline-none" value="120" onblur="updateSeatRules()">
+                        </div>
+                    </div>
                     <div>
                         <label class="text-xs text-gray-400">Hürden-Prozentwert (z. B. 5.0)</label>
                         <input type="number" step="0.1" id="edit-threshold" class="w-full bg-gray-900 border border-gray-800 p-2 text-sm rounded-lg text-white focus:border-sky-500 focus:outline-none" value="5.0" onblur="updateThreshold()">
                     </div>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-xs font-bold tech-font text-sky-400 uppercase mb-2">Globale Daten</h3>
+                <div class="space-y-2">
                     <div>
                         <label class="text-xs text-gray-400">Flagge / Icon</label>
                         <input type="text" id="edit-flag" class="w-full bg-gray-900 border border-gray-800 p-2 text-sm rounded-lg text-white focus:border-sky-500 focus:outline-none" onblur="updateMeta()">
@@ -291,6 +307,9 @@
         let parliamentStyle = 'arc';
         let seatMode = 'parties';
         let thresholdPct = 5.0;
+        let majoritySeatsNeeded = 61;
+        let totalParliamentSeats = 120;
+
         let parliamentChartInstance = null;
         let coalitionChartInstance = null;
 
@@ -349,6 +368,8 @@
 
         window.onload = () => {
             renderAll(true);
+            document.getElementById('edit-majority').value = majoritySeatsNeeded;
+            document.getElementById('edit-total-seats').value = totalParliamentSeats;
             document.getElementById('edit-threshold').value = thresholdPct;
             document.getElementById('edit-flag').value = meta.flag;
             document.getElementById('edit-progress').value = meta.progress;
@@ -454,13 +475,20 @@
                 barItem.className = 'flex flex-col items-center justify-end h-full w-full relative px-0.5';
                 barItem.innerHTML = `
                     <div class="w-full flex items-end justify-center gap-0.5 h-full relative">
-                        <!-- New Result Bar -->
+                        <!-- Main Bar -->
                         <div class="w-full max-w-[75px] flex flex-col justify-between p-2 text-center text-white font-bold text-sm tech-font rounded-none shadow-lg transition-all duration-300 relative z-10" 
                              style="height: ${heightPct}%; background-color: ${p.color};">
                             <span>${p.pct}%</span>
-                            ${p.govTag ? `<div class="text-[9px] font-black uppercase tracking-wider px-1 py-0.5 rounded text-white mt-auto border border-white/20 shadow" style="background-color: ${p.color}">${p.govTag}</div>` : ''}
+                            
+                            <!-- EXAKT GLEICHE HORIZONTALE HÖHE FÜR GOV.-LABEL (bottom: 5px) -->
+                            ${p.govTag ? `
+                                <div class="absolute bottom-[5px] left-1/2 -translate-x-1/2 text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded text-white border border-white/20 shadow z-30 whitespace-nowrap" 
+                                     style="background-color: ${p.color}">
+                                    ${p.govTag}
+                                </div>
+                            ` : ''}
                         </div>
-                        <!-- Old Result Shaded Bar (Bild 12 Vorbild) -->
+                        <!-- Old Result Shaded Bar -->
                         <div class="w-3/4 max-w-[25px] flex flex-col justify-end p-0.5 text-center text-[9px] text-white/70 tech-font rounded-none shadow transition-all duration-300 relative z-0 opacity-40 bg-white/20 border border-white/30"
                              style="height: ${oldHeightPct}%;">
                             <span class="rotate-90 sm:rotate-0">${p.oldPct}%</span>
@@ -518,7 +546,8 @@
 
         function renderParliamentChart(fullRebuild = false) {
             const ctx = document.getElementById('parliamentChart').getContext('2d');
-            
+            document.getElementById('display-total-seats').innerText = totalParliamentSeats;
+
             let dataSeats = [];
             let colors = [];
 
@@ -600,8 +629,7 @@
             blockQuickSelect.innerHTML = '';
 
             let totalSelectedSeats = 0;
-            const maxSeats = parliamentParties.reduce((a, b) => a + b.seats, 0);
-            const majorityThreshold = 64; // Korrigiert auf 64 Sitze
+            const currentTotalSeats = parliamentParties.reduce((a, b) => a + b.seats, 0);
 
             const blockNames = [...new Set(parliamentParties.map(p => (p.block && p.block.trim() !== '') ? p.block.trim() : 'Sonstige'))];
 
@@ -646,17 +674,17 @@
                 container.appendChild(btn);
             });
 
-            const remainingSeats = Math.max(maxSeats - totalSelectedSeats, 0);
+            const remainingSeats = Math.max(currentTotalSeats - totalSelectedSeats, 0);
             cDataSeats.push(remainingSeats);
             cColors.push('rgba(255, 255, 255, 0.05)');
 
             const statusEl = document.getElementById('coalition-status');
-            if (totalSelectedSeats >= majorityThreshold) {
+            if (totalSelectedSeats >= majoritySeatsNeeded) {
                 statusEl.className = 'text-xs font-bold tech-font px-3.5 py-1.5 rounded-lg bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 shadow-[0_0_10px_rgba(16,185,129,0.2)]';
-                statusEl.innerText = `MEHRHEIT ERREICHT (${totalSelectedSeats} / ${majorityThreshold} Sitze)`;
+                statusEl.innerText = `MEHRHEIT ERREICHT (${totalSelectedSeats} / ${majoritySeatsNeeded} Sitze)`;
             } else {
                 statusEl.className = 'text-xs font-bold tech-font px-3.5 py-1.5 rounded-lg bg-rose-950/60 text-rose-300 border border-rose-800/60';
-                statusEl.innerText = `KEINE MEHRHEIT (${totalSelectedSeats} / ${majorityThreshold} Sitze)`;
+                statusEl.innerText = `KEINE MEHRHEIT (${totalSelectedSeats} / ${majoritySeatsNeeded} Sitze)`;
             }
 
             if (parliamentStyle === 'arc') {
@@ -785,6 +813,14 @@
         function toggleEditor() {
             const panel = document.getElementById('editor-panel');
             panel.classList.toggle('translate-x-full');
+        }
+
+        function updateSeatRules() {
+            const majVal = parseInt(document.getElementById('edit-majority').value);
+            const totalVal = parseInt(document.getElementById('edit-total-seats').value);
+            if (!isNaN(majVal)) majoritySeatsNeeded = majVal;
+            if (!isNaN(totalVal)) totalParliamentSeats = totalVal;
+            renderAll(false);
         }
 
         function updateThreshold() {
