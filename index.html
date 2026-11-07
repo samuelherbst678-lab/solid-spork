@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de" class="dark">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -66,10 +66,10 @@
         </div>
         <div class="overflow-hidden flex-1 relative flex items-center">
             <div id="ticker-text" class="ticker-move text-white font-semibold text-sm tracking-wide">
-                <span class="inline-block px-8">+++ WAHLSTUDIO BEREIT FÜR DATENEINGABE +++</span>
-                <span class="inline-block px-8">BITTE PARTEIEN UND WERTE IM EDITOR HINZUFÜGEN +++</span>
-                <span class="inline-block px-8">+++ WAHLSTUDIO BEREIT FÜR DATENEINGABE +++</span>
-                <span class="inline-block px-8">BITTE PARTEIEN UND WERTE IM EDITOR HINZUFÜGEN +++</span>
+                <span class="inline-block px-8">+++ ELECTION STUDIO READY FOR DATA INPUT +++</span>
+                <span class="inline-block px-8">PLEASE ADD PARTIES AND VALUES IN THE EDITOR +++</span>
+                <span class="inline-block px-8">+++ ELECTION STUDIO READY FOR DATA INPUT +++</span>
+                <span class="inline-block px-8">PLEASE ADD PARTIES AND VALUES IN THE EDITOR +++</span>
             </div>
         </div>
     </div>
@@ -107,12 +107,12 @@
 
                 <div class="h-4 w-[1px] bg-gray-800 mx-1"></div>
 
-                <button onclick="setParliamentStyle('arc')" id="btn-style-arc" class="px-2.5 py-1.5 text-xs font-semibold rounded tech-font bg-sky-600 text-white border border-sky-400/30 shadow">⭕ HALBKREIS</button>
+                <button onclick="setParliamentStyle('arc')" id="btn-style-arc" class="px-2.5 py-1.5 text-xs font-semibold rounded tech-font bg-sky-600 text-white border border-sky-400/30 shadow">⭕ SEMICIRCLE</button>
                 <button onclick="setParliamentStyle('westminster')" id="btn-style-uk" class="px-2.5 py-1.5 text-xs font-semibold rounded tech-font bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-700">🇬🇧 WESTMINSTER</button>
                 
-                <button onclick="setMode('parliament')" id="btn-parliament" class="px-3 py-1.5 text-xs font-semibold rounded tech-font bg-sky-600 text-white shadow">PARLAMENT</button>
-                <button onclick="setMode('presidential')" id="btn-presidential" class="px-3 py-1.5 text-xs font-semibold rounded tech-font bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-700">PRÄSIDENT</button>
-                <button onclick="setMode('us')" id="btn-us" class="px-3 py-1.5 text-xs font-semibold rounded tech-font bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-700">US-WAHL</button>
+                <button onclick="setMode('parliament')" id="btn-parliament" class="px-3 py-1.5 text-xs font-semibold rounded tech-font bg-sky-600 text-white shadow">PARLIAMENT</button>
+                <button onclick="setMode('presidential')" id="btn-presidential" class="px-3 py-1.5 text-xs font-semibold rounded tech-font bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-700">PRESIDENTIAL</button>
+                <button onclick="setMode('us')" id="btn-us" class="px-3 py-1.5 text-xs font-semibold rounded tech-font bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-700">US ELECTION</button>
                 <button onclick="toggleEditor()" class="px-3 py-1.5 text-xs font-semibold rounded tech-font bg-amber-600/80 hover:bg-amber-600 text-white ml-2 shadow">⚙️ EDITOR</button>
                 <button onclick="export4K()" class="px-3 py-1.5 text-xs font-semibold rounded tech-font bg-emerald-600 hover:bg-emerald-500 text-white shadow">📸 4K EXPORT</button>
             </div>
@@ -130,8 +130,8 @@
             <!-- MAIN PARLIAMENT SEAT DISTRIBUTION -->
             <div id="parliament-section" class="pitch-card rounded-xl p-6 flex flex-col items-center justify-center relative min-h-[340px]">
                 <div class="flex justify-between items-center w-full mb-3 max-w-3xl">
-                    <h3 class="text-xs font-bold tech-font text-gray-400 uppercase tracking-widest">Gesamte Sitzverteilung (<span id="display-total-seats">0</span> Sitze)</h3>
-                    <button onclick="toggleSeatGrouping()" id="btn-seat-grouping" class="text-xs bg-gray-800 hover:bg-gray-700 text-sky-400 px-3 py-1 rounded border border-gray-700 tech-font font-bold">Modus: Parteien</button>
+                    <h3 class="text-xs font-bold tech-font text-gray-400 uppercase tracking-widest">Total Seat Distribution (<span id="display-total-seats">0</span> Seats)</h3>
+                    <button onclick="toggleSeatGrouping()" id="btn-seat-grouping" class="text-xs bg-gray-800 hover:bg-gray-700 text-sky-400 px-3 py-1 rounded border border-gray-700 tech-font font-bold">Mode: Parties</button>
                 </div>
                 <div id="block-container" class="flex gap-3 mb-4 flex-wrap justify-center w-full max-w-3xl"></div>
                 
@@ -147,14 +147,14 @@
                         </div>
                         <div class="flex-1 flex flex-col gap-4">
                             <div class="flex flex-col gap-1 bg-gray-900/60 p-3 rounded-lg border border-gray-800">
-                                <span class="text-[10px] font-bold tech-font text-sky-400 tracking-wider">REGIERUNGS-BANKS</span>
+                                <span class="text-[10px] font-bold tech-font text-sky-400 tracking-wider">GOVERNMENT BENCHES</span>
                                 <div id="uk-main-gov-grid" class="flex flex-wrap gap-1.5 items-center"></div>
                             </div>
                             <div class="w-full h-0.5 bg-rose-600/40 relative flex justify-center items-center">
                                 <span class="text-[8px] bg-panel px-2 text-gray-500 font-bold tech-font">AISLE</span>
                             </div>
                             <div class="flex flex-col gap-1 bg-gray-900/60 p-3 rounded-lg border border-gray-800">
-                                <span class="text-[10px] font-bold tech-font text-rose-400 tracking-wider">OPPOSITIONS-BANKS</span>
+                                <span class="text-[10px] font-bold tech-font text-rose-400 tracking-wider">OPPOSITION BENCHES</span>
                                 <div id="uk-main-opp-grid" class="flex flex-wrap gap-1.5 items-center"></div>
                             </div>
                         </div>
@@ -165,21 +165,21 @@
             <!-- COALITION CALCULATOR -->
             <div id="coalition-section" class="pitch-card rounded-xl p-6 flex flex-col items-center justify-center relative min-h-[380px]">
                 <div class="flex justify-between items-center w-full mb-3">
-                    <h3 class="text-xs font-bold tech-font text-gray-300 uppercase tracking-wider">Koalitionsrechner</h3>
+                    <h3 class="text-xs font-bold tech-font text-gray-300 uppercase tracking-wider">Coalition Calculator</h3>
                     <div id="coalition-status" class="text-xs font-bold tech-font px-3.5 py-1.5 rounded-lg bg-rose-950/60 text-rose-300 border border-rose-800/60">
-                        KEINE MEHRHEIT (0 / 0 Sitze)
+                        NO MAJORITY (0 / 0 Seats)
                     </div>
                 </div>
 
                 <div class="w-full flex items-center justify-center gap-2 mb-3 pb-2 border-b border-gray-800">
-                    <span class="text-[10px] font-bold tech-font text-gray-500 uppercase">Block Wählen:</span>
+                    <span class="text-[10px] font-bold tech-font text-gray-500 uppercase">Select Block:</span>
                     <div id="coalition-block-quickselect" class="flex gap-2 flex-wrap"></div>
                 </div>
 
                 <div id="coalition-buttons" class="flex flex-wrap gap-2 mb-6 justify-center w-full"></div>
 
                 <div class="flex flex-col items-center justify-center w-full pt-3 border-t border-gray-800">
-                    <span class="text-xs font-bold tech-font text-gray-400 mb-3 uppercase tracking-wider">Koalitions-Sitzverteilung</span>
+                    <span class="text-xs font-bold tech-font text-gray-400 mb-3 uppercase tracking-wider">Coalition Seat Distribution</span>
                     
                     <div id="coalition-arc-wrapper" class="relative w-[340px] h-[180px] flex justify-center items-center">
                         <canvas id="coalitionChart"></canvas>
@@ -193,14 +193,14 @@
                             </div>
                             <div class="flex-1 flex flex-col gap-4">
                                 <div class="flex flex-col gap-1 bg-gray-900/60 p-3 rounded-lg border border-gray-800">
-                                    <span class="text-[10px] font-bold tech-font text-emerald-400 tracking-wider">GEWÄHLTE KOALITION</span>
+                                    <span class="text-[10px] font-bold tech-font text-emerald-400 tracking-wider">SELECTED COALITION</span>
                                     <div id="uk-coalition-gov-grid" class="flex flex-wrap gap-1.5 items-center"></div>
                                 </div>
                                 <div class="w-full h-0.5 bg-rose-600/40 relative flex justify-center items-center">
                                     <span class="text-[8px] bg-panel px-2 text-gray-500 font-bold tech-font">AISLE</span>
                                 </div>
                                 <div class="flex flex-col gap-1 bg-gray-900/60 p-3 rounded-lg border border-gray-800">
-                                    <span class="text-[10px] font-bold tech-font text-gray-400 tracking-wider">RESTLICHE PARTEIEN</span>
+                                    <span class="text-[10px] font-bold tech-font text-gray-400 tracking-wider">REMAINING PARTIES</span>
                                     <div id="uk-coalition-opp-grid" class="flex flex-wrap gap-1.5 items-center"></div>
                                 </div>
                             </div>
@@ -214,9 +214,9 @@
         <main id="view-us" class="hidden flex-1 flex-col gap-6">
             <div class="pitch-card rounded-xl p-6">
                 <div class="flex justify-between text-sm font-bold tech-font mb-2">
-                    <span class="text-blue-400 text-lg">DEMOKRATEN: <span id="us-dem-votes">0</span></span>
-                    <span class="text-amber-400">270 ZUR MEHRHEIT (TOTAL 538)</span>
-                    <span class="text-rose-400 text-lg">REPUBLIKANER: <span id="us-rep-votes">0</span></span>
+                    <span class="text-blue-400 text-lg">DEMOCRATS: <span id="us-dem-votes">0</span></span>
+                    <span class="text-amber-400">270 TO WIN (TOTAL 538)</span>
+                    <span class="text-rose-400 text-lg">REPUBLICANS: <span id="us-rep-votes">0</span></span>
                 </div>
                 <div class="w-full bg-gray-900 h-8 rounded-sm overflow-hidden flex relative border border-gray-800 shadow-inner">
                     <div id="us-bar-dem" class="bg-blue-600 h-full transition-all duration-300" style="width: 0%"></div>
@@ -229,8 +229,8 @@
 
             <div class="pitch-card rounded-xl p-4 flex-1">
                 <div class="flex justify-between items-center mb-3">
-                    <span class="text-xs font-semibold tech-font text-gray-400">STAATEN-ZUWEISUNG (⭐ = SWING STATE)</span>
-                    <button onclick="resetUSStates()" class="text-xs bg-gray-800 hover:bg-gray-700 px-3 py-1.5 rounded-lg text-gray-300 border border-gray-700">Alle Zurücksetzen</button>
+                    <span class="text-xs font-semibold tech-font text-gray-400">STATE ALLOCATION (⭐ = SWING STATE)</span>
+                    <button onclick="resetUSStates()" class="text-xs bg-gray-800 hover:bg-gray-700 px-3 py-1.5 rounded-lg text-gray-300 border border-gray-700">Reset All</button>
                 </div>
                 <div id="us-states-grid" class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-9 lg:grid-cols-11 gap-2"></div>
             </div>
@@ -246,39 +246,39 @@
 
         <div class="space-y-6">
             <div>
-                <h3 class="text-xs font-bold tech-font text-sky-400 uppercase mb-2">Sitz- & Mehrheitssteuerung</h3>
+                <h3 class="text-xs font-bold tech-font text-sky-400 uppercase mb-2">Seat & Majority Control</h3>
                 <div class="space-y-2">
                     <div class="grid grid-cols-2 gap-2">
                         <div>
-                            <label class="text-xs text-gray-400">Benötigte Mehrheit</label>
+                            <label class="text-xs text-gray-400">Required Majority</label>
                             <input type="number" id="edit-majority" class="w-full bg-gray-900 border border-gray-800 p-2 text-sm rounded-lg text-white focus:border-sky-500 focus:outline-none" value="0" onblur="updateSeatRules()">
                         </div>
                         <div>
-                            <label class="text-xs text-gray-400">Gesamte Sitze</label>
+                            <label class="text-xs text-gray-400">Total Seats</label>
                             <input type="number" id="edit-total-seats" class="w-full bg-gray-900 border border-gray-800 p-2 text-sm rounded-lg text-white focus:border-sky-500 focus:outline-none" value="0" onblur="updateSeatRules()">
                         </div>
                     </div>
                     <div>
-                        <label class="text-xs text-gray-400">Hürden-Prozentwert (z. B. 5.0)</label>
+                        <label class="text-xs text-gray-400">Threshold Percentage (e.g. 5.0)</label>
                         <input type="number" step="0.1" id="edit-threshold" class="w-full bg-gray-900 border border-gray-800 p-2 text-sm rounded-lg text-white focus:border-sky-500 focus:outline-none" value="0" onblur="updateThreshold()">
                     </div>
                 </div>
             </div>
 
             <div>
-                <h3 class="text-xs font-bold tech-font text-sky-400 uppercase mb-2">Globale Daten</h3>
+                <h3 class="text-xs font-bold tech-font text-sky-400 uppercase mb-2">Global Settings</h3>
                 <div class="space-y-2">
                     <div>
-                        <label class="text-xs text-gray-400">Flagge / Icon</label>
+                        <label class="text-xs text-gray-400">Flag / Icon</label>
                         <input type="text" id="edit-flag" class="w-full bg-gray-900 border border-gray-800 p-2 text-sm rounded-lg text-white focus:border-sky-500 focus:outline-none" onblur="updateMeta()">
                     </div>
                     <div class="grid grid-cols-2 gap-2">
                         <div>
-                            <label class="text-xs text-gray-400">Auszählungsstand</label>
+                            <label class="text-xs text-gray-400">Counted Progress</label>
                             <input type="text" id="edit-progress" class="w-full bg-gray-900 border border-gray-800 p-2 text-sm rounded-lg text-white focus:border-sky-500 focus:outline-none" onblur="updateMeta()">
                         </div>
                         <div>
-                            <label class="text-xs text-gray-400">Wahlbeteiligung</label>
+                            <label class="text-xs text-gray-400">Voter Turnout</label>
                             <input type="text" id="edit-turnout" class="w-full bg-gray-900 border border-gray-800 p-2 text-sm rounded-lg text-white focus:border-sky-500 focus:outline-none" onblur="updateMeta()">
                         </div>
                     </div>
@@ -286,14 +286,14 @@
             </div>
 
             <div>
-                <h3 class="text-xs font-bold tech-font text-rose-400 uppercase mb-2">Eilmeldungen (Ticker)</h3>
+                <h3 class="text-xs font-bold tech-font text-rose-400 uppercase mb-2">Breaking News Ticker</h3>
                 <textarea id="edit-ticker" rows="3" class="w-full bg-gray-900 border border-gray-800 p-2 text-xs rounded-lg text-white focus:border-sky-500 focus:outline-none" onblur="updateTicker()"></textarea>
             </div>
 
             <div>
                 <div class="flex justify-between items-center mb-2">
-                    <h3 id="editor-data-title" class="text-xs font-bold tech-font text-sky-400 uppercase">Einträge Bearbeiten</h3>
-                    <button onclick="addParty()" class="text-xs bg-sky-600 hover:bg-sky-500 text-white px-3 py-1.5 rounded-lg shadow">+ Hinzufügen</button>
+                    <h3 id="editor-data-title" class="text-xs font-bold tech-font text-sky-400 uppercase">Edit Entries</h3>
+                    <button onclick="addParty()" class="text-xs bg-sky-600 hover:bg-sky-500 text-white px-3 py-1.5 rounded-lg shadow">+ Add Entry</button>
                 </div>
                 <div id="editor-parties" class="space-y-3"></div>
             </div>
@@ -315,7 +315,7 @@
             flag: '🌐',
             progress: '0.0%',
             turnout: '0.0%',
-            ticker: '+++ WAHLSTUDIO BEREIT FÜR DATENEINGABE +++'
+            ticker: '+++ ELECTION STUDIO READY FOR DATA INPUT +++'
         };
 
         let parliamentParties = [];
@@ -390,7 +390,7 @@
 
         function toggleSeatGrouping() {
             seatMode = seatMode === 'parties' ? 'blocks' : 'parties';
-            document.getElementById('btn-seat-grouping').innerText = `Modus: ${seatMode === 'parties' ? 'Parteien' : 'Blöcke'}`;
+            document.getElementById('btn-seat-grouping').innerText = `Mode: ${seatMode === 'parties' ? 'Parties' : 'Blocks'}`;
             renderAll(true);
         }
 
@@ -441,7 +441,7 @@
             ideologyContainer.innerHTML = '';
 
             if (data.length === 0) {
-                barsContainer.innerHTML = `<div class="text-xs text-gray-500 tech-font py-12">Keine Einträge vorhanden. Bitte über den Editor hinzufügen.</div>`;
+                barsContainer.innerHTML = `<div class="text-xs text-gray-500 tech-font py-12">No entries found. Please add entries via the editor.</div>`;
                 return;
             }
 
@@ -496,7 +496,7 @@
                 ideologyItem.className = 'flex flex-col items-center gap-1 w-full px-[0.25px]';
                 ideologyItem.innerHTML = `
                     <div class="text-xs font-semibold ${diffColor} tech-font">${p.diff || '0.0%'}</div>
-                    <!-- NUR ABKÜRZUNG WIE AUF BILD 16 -->
+                    <!-- ONLY ABBREVIATION -->
                     <div class="text-[10px] font-bold px-2.5 py-1 rounded text-white shadow-sm break-words max-w-full" style="background-color: ${p.color}">${p.short}</div>
                     <div class="text-[11px] text-gray-400 leading-snug break-words whitespace-normal w-full mt-1 font-medium">
                         ${(p.ideology || '').replace(/\n/g, '<br>')}
@@ -548,7 +548,7 @@
             } else {
                 const blockMap = {};
                 parliamentParties.forEach(p => {
-                    const bName = (p.block && p.block.trim() !== '') ? p.block.trim() : 'Sonstige';
+                    const bName = (p.block && p.block.trim() !== '') ? p.block.trim() : 'Other';
                     if (!blockMap[bName]) blockMap[bName] = { seats: 0, parties: [] };
                     blockMap[bName].seats += p.seats;
                     blockMap[bName].parties.push(p);
@@ -595,7 +595,7 @@
 
             const blockMap = {};
             parliamentParties.forEach(p => {
-                const blockName = (p.block && p.block.trim() !== '') ? p.block.trim() : 'Sonstige';
+                const blockName = (p.block && p.block.trim() !== '') ? p.block.trim() : 'Other';
                 if (!blockMap[blockName]) blockMap[blockName] = { seats: 0, parties: [] };
                 blockMap[blockName].seats += p.seats;
                 blockMap[blockName].parties.push(p);
@@ -608,7 +608,7 @@
                 const blockBadge = document.createElement('div');
                 blockBadge.className = 'px-4 py-2 rounded-lg text-white font-bold text-xs tech-font flex items-center gap-2 border border-white/10 shadow-lg uppercase tracking-wider';
                 blockBadge.style.backgroundColor = strongestParty ? strongestParty.color : '#334155';
-                blockBadge.innerHTML = `<span>${blockName}: ${b.seats} SITZE</span>`;
+                blockBadge.innerHTML = `<span>${blockName}: ${b.seats} SEATS</span>`;
                 container.appendChild(blockBadge);
             });
         }
@@ -622,10 +622,10 @@
             let totalSelectedSeats = 0;
             const currentTotalSeats = parliamentParties.reduce((a, b) => a + b.seats, 0);
 
-            const blockNames = [...new Set(parliamentParties.map(p => (p.block && p.block.trim() !== '') ? p.block.trim() : 'Sonstige'))];
+            const blockNames = [...new Set(parliamentParties.map(p => (p.block && p.block.trim() !== '') ? p.block.trim() : 'Other'))];
 
             blockNames.forEach(bName => {
-                const bParties = parliamentParties.filter(p => ((p.block && p.block.trim() !== '') ? p.block.trim() : 'Sonstige') === bName);
+                const bParties = parliamentParties.filter(p => ((p.block && p.block.trim() !== '') ? p.block.trim() : 'Other') === bName);
                 const allSelected = bParties.every(p => p.coalition);
                 const strongest = [...bParties].sort((x, y) => y.seats - x.seats)[0];
 
@@ -672,10 +672,10 @@
             const statusEl = document.getElementById('coalition-status');
             if (totalSelectedSeats >= majoritySeatsNeeded && majoritySeatsNeeded > 0) {
                 statusEl.className = 'text-xs font-bold tech-font px-3.5 py-1.5 rounded-lg bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 shadow-[0_0_10px_rgba(16,185,129,0.2)]';
-                statusEl.innerText = `MEHRHEIT ERREICHT (${totalSelectedSeats} / ${majoritySeatsNeeded} Sitze)`;
+                statusEl.innerText = `MAJORITY REACHED (${totalSelectedSeats} / ${majoritySeatsNeeded} Seats)`;
             } else {
                 statusEl.className = 'text-xs font-bold tech-font px-3.5 py-1.5 rounded-lg bg-rose-950/60 text-rose-300 border border-rose-800/60';
-                statusEl.innerText = `KEINE MEHRHEIT (${totalSelectedSeats} / ${majoritySeatsNeeded} Sitze)`;
+                statusEl.innerText = `NO MAJORITY (${totalSelectedSeats} / ${majoritySeatsNeeded} Seats)`;
             }
 
             if (parliamentStyle === 'arc') {
@@ -843,7 +843,7 @@
             const container = document.getElementById('editor-parties');
             const data = getActiveData();
             
-            document.getElementById('editor-data-title').innerText = currentMode === 'presidential' ? 'Kandidaten (Präsident)' : 'Parteien (Parlament)';
+            document.getElementById('editor-data-title').innerText = currentMode === 'presidential' ? 'Candidates (Presidential)' : 'Parties (Parliament)';
             container.innerHTML = '';
 
             data.forEach((p, index) => {
@@ -851,28 +851,28 @@
                 item.className = 'p-3.5 bg-gray-900/80 border border-gray-800 rounded-xl space-y-2.5 shadow';
                 item.innerHTML = `
                     <div class="flex justify-between items-center">
-                        <span class="text-xs font-bold text-white tech-font">Eintrag #${index + 1}</span>
-                        <button onclick="removeParty(${p.id})" class="text-xs text-rose-400 hover:text-rose-300 font-medium">Löschen</button>
+                        <span class="text-xs font-bold text-white tech-font">Entry #${index + 1}</span>
+                        <button onclick="removeParty(${p.id})" class="text-xs text-rose-400 hover:text-rose-300 font-medium">Delete</button>
                     </div>
                     <div>
-                        <label class="text-[10px] text-gray-400">Name / Abkürzung (z.B. National)</label>
-                        <input type="text" value="${p.short}" onblur="updateParty(${p.id}, 'short', this.value)" class="w-full bg-gray-950 border border-gray-800 p-1.5 text-xs rounded-lg text-white focus:border-sky-500 focus:outline-none" placeholder="Abkürzung">
+                        <label class="text-[10px] text-gray-400">Abbreviation / Name (e.g. NAT)</label>
+                        <input type="text" value="${p.short}" onblur="updateParty(${p.id}, 'short', this.value)" class="w-full bg-gray-950 border border-gray-800 p-1.5 text-xs rounded-lg text-white focus:border-sky-500 focus:outline-none" placeholder="Abbreviation">
                     </div>
                     ${currentMode === 'parliament' ? `
                     <div class="grid grid-cols-2 gap-2">
-                        <input type="text" value="${p.block || ''}" onblur="updateParty(${p.id}, 'block', this.value)" class="bg-gray-950 border border-sky-500/30 p-1.5 text-xs rounded-lg text-sky-300 focus:outline-none" placeholder="Block-Name">
+                        <input type="text" value="${p.block || ''}" onblur="updateParty(${p.id}, 'block', this.value)" class="bg-gray-950 border border-sky-500/30 p-1.5 text-xs rounded-lg text-sky-300 focus:outline-none" placeholder="Block Name">
                         <input type="text" value="${p.govTag || ''}" onblur="updateParty(${p.id}, 'govTag', this.value)" class="bg-gray-950 border border-sky-500/30 p-1.5 text-xs rounded-lg text-sky-300 focus:outline-none" placeholder="Gov. Tag">
                     </div>` : ''}
                     <div class="grid grid-cols-3 gap-2">
-                        <input type="number" value="${p.seats}" onblur="updateParty(${p.id}, 'seats', parseInt(this.value))" class="bg-gray-950 border border-gray-800 p-1.5 text-xs rounded-lg text-white focus:border-sky-500 focus:outline-none" placeholder="Sitze" ${currentMode === 'presidential' ? 'disabled' : ''}>
-                        <input type="number" step="0.1" value="${p.pct}" onblur="updateParty(${p.id}, 'pct', parseFloat(this.value))" class="bg-gray-950 border border-gray-800 p-1.5 text-xs rounded-lg text-white focus:border-sky-500 focus:outline-none" placeholder="% (Aktuell)">
-                        <input type="number" step="0.1" value="${p.oldPct || 0}" onblur="updateParty(${p.id}, 'oldPct', parseFloat(this.value))" class="bg-gray-950 border border-gray-800 p-1.5 text-xs rounded-lg text-white focus:border-sky-500 focus:outline-none" placeholder="% (Vorjahr)">
+                        <input type="number" value="${p.seats}" onblur="updateParty(${p.id}, 'seats', parseInt(this.value))" class="bg-gray-950 border border-gray-800 p-1.5 text-xs rounded-lg text-white focus:border-sky-500 focus:outline-none" placeholder="Seats" ${currentMode === 'presidential' ? 'disabled' : ''}>
+                        <input type="number" step="0.1" value="${p.pct}" onblur="updateParty(${p.id}, 'pct', parseFloat(this.value))" class="bg-gray-950 border border-gray-800 p-1.5 text-xs rounded-lg text-white focus:border-sky-500 focus:outline-none" placeholder="% (Current)">
+                        <input type="number" step="0.1" value="${p.oldPct || 0}" onblur="updateParty(${p.id}, 'oldPct', parseFloat(this.value))" class="bg-gray-950 border border-gray-800 p-1.5 text-xs rounded-lg text-white focus:border-sky-500 focus:outline-none" placeholder="% (Previous)">
                     </div>
                     <div class="grid grid-cols-2 gap-2">
                         <input type="color" value="${p.color}" oninput="updatePartyColorInstant(${p.id}, this.value)" class="w-full h-8 bg-transparent border border-gray-800 rounded-lg cursor-pointer">
                         <input type="text" value="${p.diff}" onblur="updateParty(${p.id}, 'diff', this.value)" class="bg-gray-950 border border-gray-800 p-1.5 text-xs rounded-lg text-white focus:border-sky-500 focus:outline-none" placeholder="+/- %">
                     </div>
-                    <textarea onblur="updateParty(${p.id}, 'ideology', this.value)" class="w-full bg-gray-950 border border-gray-800 p-1.5 text-xs rounded-lg text-white h-14 focus:border-sky-500 focus:outline-none" placeholder="Ideologie">${p.ideology}</textarea>
+                    <textarea onblur="updateParty(${p.id}, 'ideology', this.value)" class="w-full bg-gray-950 border border-gray-800 p-1.5 text-xs rounded-lg text-white h-14 focus:border-sky-500 focus:outline-none" placeholder="Ideology">${p.ideology}</textarea>
                 `;
                 container.appendChild(item);
             });
@@ -905,7 +905,7 @@
         function addParty() {
             const data = getActiveData();
             const newId = Date.now();
-            data.push({ id: newId, short: 'Partei', seats: currentMode === 'parliament' ? 10 : 0, pct: 5.0, oldPct: 4.0, diff: '+1.0%', color: '#38BDF8', ideology: 'Zentrum', govTag: '', block: 'Neuer Block', coalition: false });
+            data.push({ id: newId, short: 'PARTY', seats: currentMode === 'parliament' ? 10 : 0, pct: 5.0, oldPct: 4.0, diff: '+1.0%', color: '#38BDF8', ideology: 'Centrism', govTag: '', block: 'New Block', coalition: false });
             renderAll(true);
         }
 
@@ -926,7 +926,7 @@
                 useCORS: true
             }).then(canvas => {
                 const link = document.createElement('a');
-                link.download = `wahl_studio_4k_${Date.now()}.png`;
+                link.download = `election_studio_4k_${Date.now()}.png`;
                 link.href = canvas.toDataURL('image/png');
                 link.click();
             });
