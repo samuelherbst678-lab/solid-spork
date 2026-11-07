@@ -6,7 +6,7 @@
     <title>Elections Stats Studio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
@@ -75,7 +75,7 @@
     </div>
 
     <!-- MAIN APP WRAPPER -->
-    <div id="export-area" class="flex-1 flex flex-col p-4 md:p-6 max-w-[1920px] mx-auto w-full">
+    <div id="export-area" class="flex-1 flex flex-col p-4 md:p-6 max-w-[1920px] mx-auto w-full bg-[#0B0F19]">
         
         <!-- HEADER -->
         <header class="flex flex-wrap items-center justify-between pb-4 mb-4 border-b border-gray-800 gap-4">
@@ -131,7 +131,7 @@
             <div id="parliament-section" class="pitch-card rounded-xl p-6 flex flex-col items-center justify-center relative min-h-[340px]">
                 <div class="flex justify-between items-center w-full mb-3 max-w-3xl">
                     <h3 class="text-xs font-bold tech-font text-gray-400 uppercase tracking-widest">Total Seat Distribution (<span id="display-total-seats">0</span> Seats)</h3>
-                    <button onclick="toggleSeatGrouping()" id="btn-seat-grouping" class="text-xs bg-gray-800 hover:bg-gray-700 text-sky-400 px-3 py-1 rounded border border-gray-700 tech-font font-bold">Mode: Parties</button>
+                    <button onclick="toggleSeatGrouping()" id="btn-seat-grouping" class="text-xs bg-gray-800 hover:bg-gray-700 text-sky-400 px-3 py-1 rounded border border-gray-700 tech-font font-bold" data-html2canvas-ignore="true">Mode: Parties</button>
                 </div>
                 <div id="block-container" class="flex gap-3 mb-4 flex-wrap justify-center w-full max-w-3xl"></div>
                 
@@ -176,7 +176,7 @@
                     <div id="coalition-block-quickselect" class="flex gap-2 flex-wrap"></div>
                 </div>
 
-                <div id="coalition-buttons" class="flex flex-wrap gap-2 mb-6 justify-center w-full"></div>
+                <div id="coalition-buttons" class="flex flex-wrap gap-2 mb-6 justify-center w-full" data-html2canvas-ignore="true"></div>
 
                 <div class="flex flex-col items-center justify-center w-full pt-3 border-t border-gray-800">
                     <span class="text-xs font-bold tech-font text-gray-400 mb-3 uppercase tracking-wider">Coalition Seat Distribution</span>
@@ -230,7 +230,7 @@
             <div class="pitch-card rounded-xl p-4 flex-1">
                 <div class="flex justify-between items-center mb-3">
                     <span class="text-xs font-semibold tech-font text-gray-400">STATE ALLOCATION (⭐ = SWING STATE)</span>
-                    <button onclick="resetUSStates()" class="text-xs bg-gray-800 hover:bg-gray-700 px-3 py-1.5 rounded-lg text-gray-300 border border-gray-700">Reset All</button>
+                    <button onclick="resetUSStates()" class="text-xs bg-gray-800 hover:bg-gray-700 px-3 py-1.5 rounded-lg text-gray-300 border border-gray-700" data-html2canvas-ignore="true">Reset All</button>
                 </div>
                 <div id="us-states-grid" class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-9 lg:grid-cols-11 gap-2"></div>
             </div>
@@ -864,13 +864,13 @@
                         <input type="text" value="${p.govTag || ''}" onblur="updateParty(${p.id}, 'govTag', this.value)" class="bg-gray-950 border border-sky-500/30 p-1.5 text-xs rounded-lg text-sky-300 focus:outline-none" placeholder="Gov. Tag">
                     </div>` : ''}
                     <div class="grid grid-cols-3 gap-2">
-                        <input type="number" value="${p.seats}" onblur="updateParty(${p.id}, 'seats', parseInt(this.value))" class="bg-gray-950 border border-gray-800 p-1.5 text-xs rounded-lg text-white focus:border-sky-500 focus:outline-none" placeholder="Seats" ${currentMode === 'presidential' ? 'disabled' : ''}>
-                        <input type="number" step="0.1" value="${p.pct}" onblur="updateParty(${p.id}, 'pct', parseFloat(this.value))" class="bg-gray-950 border border-gray-800 p-1.5 text-xs rounded-lg text-white focus:border-sky-500 focus:outline-none" placeholder="% (Current)">
-                        <input type="number" step="0.1" value="${p.oldPct || 0}" onblur="updateParty(${p.id}, 'oldPct', parseFloat(this.value))" class="bg-gray-950 border border-gray-800 p-1.5 text-xs rounded-lg text-white focus:border-sky-500 focus:outline-none" placeholder="% (Previous)">
+                        <input type="number" value="${p.seats}" onblur="updateParty(${p.id}, 'seats', parseInt(this.value))" class="w-full bg-gray-950 border border-gray-800 p-1.5 text-xs rounded-lg text-white focus:border-sky-500 focus:outline-none" placeholder="Seats" ${currentMode === 'presidential' ? 'disabled' : ''}>
+                        <input type="number" step="0.1" value="${p.pct}" onblur="updateParty(${p.id}, 'pct', parseFloat(this.value))" class="w-full bg-gray-950 border border-gray-800 p-1.5 text-xs rounded-lg text-white focus:border-sky-500 focus:outline-none" placeholder="% (Current)">
+                        <input type="number" step="0.1" value="${p.oldPct || 0}" onblur="updateParty(${p.id}, 'oldPct', parseFloat(this.value))" class="w-full bg-gray-950 border border-gray-800 p-1.5 text-xs rounded-lg text-white focus:border-sky-500 focus:outline-none" placeholder="% (Previous)">
                     </div>
                     <div class="grid grid-cols-2 gap-2">
                         <input type="color" value="${p.color}" oninput="updatePartyColorInstant(${p.id}, this.value)" class="w-full h-8 bg-transparent border border-gray-800 rounded-lg cursor-pointer">
-                        <input type="text" value="${p.diff}" onblur="updateParty(${p.id}, 'diff', this.value)" class="bg-gray-950 border border-gray-800 p-1.5 text-xs rounded-lg text-white focus:border-sky-500 focus:outline-none" placeholder="+/- %">
+                        <input type="text" value="${p.diff}" onblur="updateParty(${p.id}, 'diff', this.value)" class="w-full bg-gray-950 border border-gray-800 p-1.5 text-xs rounded-lg text-white focus:border-sky-500 focus:outline-none" placeholder="+/- %">
                     </div>
                     <textarea onblur="updateParty(${p.id}, 'ideology', this.value)" class="w-full bg-gray-950 border border-gray-800 p-1.5 text-xs rounded-lg text-white h-14 focus:border-sky-500 focus:outline-none" placeholder="Ideology">${p.ideology}</textarea>
                 `;
@@ -923,12 +923,16 @@
             html2canvas(exportArea, {
                 scale: 2,
                 backgroundColor: '#0B0F19',
-                useCORS: true
+                useCORS: true,
+                logging: false
             }).then(canvas => {
                 const link = document.createElement('a');
                 link.download = `election_studio_4k_${Date.now()}.png`;
                 link.href = canvas.toDataURL('image/png');
                 link.click();
+            }).catch(err => {
+                console.error("Export failed:", err);
+                alert("Export failed. Please check console.");
             });
         }
     </script>
