@@ -918,23 +918,42 @@
             renderAll(true);
         }
 
-        function export4K() {
-            const exportArea = document.getElementById('export-area');
-            html2canvas(exportArea, {
-                scale: 2,
-                backgroundColor: '#0B0F19',
-                useCORS: true,
-                logging: false
-            }).then(canvas => {
+function export4K() {
+    const exportArea = document.getElementById('export-area');
+    html2canvas(exportArea, {
+        scale: 2,
+        backgroundColor: '#0B0F19',
+        useCORS: true,
+        logging: false
+    }).then(canvas => {
+        const filename = `election_studio_4k_${Date.now()}.png`;
+        
+        // Safari & iOS Fallback via Blob & MS-Save / Anchor
+        if (navigator.msSaveBlob) {
+            navigator.msSaveBlob(canvas.msToBlob(), filename);
+        } else {
+            canvas.toBlob(blob => {
+                const url = URL.createObjectURL(blob);
                 const link = document.createElement('a');
-                link.download = `election_studio_4k_${Date.now()}.png`;
-                link.href = canvas.toDataURL('image/png');
+                link.href = url;
+                link.download = filename;
+                
+                // Für Safari: Falls der Download-Link im gleichen Tab blockiert, als Fallback öffnen oder erzwingen
+                document.body.appendChild(link);
                 link.click();
-            }).catch(err => {
-                console.error("Export failed:", err);
-                alert("Export failed. Please check console.");
-            });
+                
+                setTimeout(() => {
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(url);
+                }, 100);
+            }, 'image/png');
         }
+    }).catch(err => {
+        console.error("Export failed:", err);
+        alert("Export failed. Please check console.");
+    });
+}
+
     </script>
 </body>
 </html>
